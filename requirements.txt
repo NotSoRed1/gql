@@ -1,5 +1,5 @@
 fastapi
-sqlalchemy
+sqlalchemy==1.3.23
 uvicorn
 pydantic
 psycopg2
