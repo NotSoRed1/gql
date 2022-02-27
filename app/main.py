@@ -24,7 +24,7 @@ from app.queries.User import UserQueries
 app = FastAPI()
 
 
-app.add_middleware(DBSessionMiddleware, db_url=settings.gql_database_url)
+app.add_middleware(DBSessionMiddleware, db_url=settings.DATABASE_URL.replace("postgres://", "postgresql://"))
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
