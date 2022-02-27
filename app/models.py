@@ -61,5 +61,5 @@ class Follow(Base):
 
     follower_id = Column(Integer, ForeignKey("users.id"), primary_key=True, nullable=False)
     followed_id = Column(Integer, ForeignKey("users.id"), primary_key=True, nullable=False)
-    follower = relationship("User", foreign_keys="Follow.follower_id")
-    followed = relationship("User", foreign_keys="Follow.followed_id")
+    follower = relationship("User", foreign_keys="Follow.follower_id", overlaps="following")
+    followed = relationship("User", foreign_keys="Follow.followed_id", overlaps="followers")
