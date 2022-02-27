@@ -45,7 +45,7 @@ class User(ObjectType):
 
     async def resolve_test(self, info):
         curr = get_curr_user(info)
-        return str(curr[6][1].decode())
+        return str(curr[6])
 
 
 
