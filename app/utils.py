@@ -41,7 +41,7 @@ def create_jwt_token(data):
 
 
 def get_curr_user(info: ResolveInfo):
-    token = info.context['request']["headers"].decode()
+    token = info.context['request']["headers"]
     # payload = jwt.decode(token, settings.secret_key, algorithms= settings.algorithm)
     # id, username = payload.get("id"), payload.get("username")
     # if not id or not username:
