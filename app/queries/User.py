@@ -23,6 +23,7 @@ class User(ObjectType):
     username = String()
     email = String()
     avatar_url = String()
+    bio = String()
     id = Int()
     created_at = DateTime()
     posts = List(lambda: Post)

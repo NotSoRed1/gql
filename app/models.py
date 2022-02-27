@@ -13,6 +13,7 @@ class User(Base):
     username = Column(String, nullable=False, index=True)
     email = Column(String, nullable=False)
     password = Column(String, nullable=False)
+    bio = Column(String, nullable=True)
     avatar_url = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=text("NOW()"))
     posts = relationship("Post")
