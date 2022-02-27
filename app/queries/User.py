@@ -48,7 +48,7 @@ class UserQueries(ObjectType):
     all_users = Field(List(User), limit=Int(), offset=Int())
     one_user = Field(User, id = Int(required=True))
     me = Field(User)
-    test = String()
+    test = Field(String())
 
     async def resolve_all_users(self, info, limit, offset):
         curr_user = get_curr_user(info)
