@@ -42,9 +42,9 @@ def create_jwt_token(data):
 
 def get_curr_user(info: ResolveInfo):
     token = info.context['request']["headers"][6][1].decode()
-    payload = jwt.decode(token, settings.secret_key, algorithms= settings.algorithm)
-    id, username = payload.get("id"), payload.get("username")
+    # payload = jwt.decode(token, settings.secret_key, algorithms= settings.algorithm)
+    # id, username = payload.get("id"), payload.get("username")
     # if not id or not username:
         # raise GraphQLError(message="unauthorized!!")
         
-    return {"id": id, "username": username, "token": token}
+    return token
