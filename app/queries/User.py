@@ -32,6 +32,7 @@ class User(ObjectType):
     following = List(Follow)
     followers_count = Int()
     following_count = Int()
+    test = String()
 
     def resolve_posts_count(self, info):
         return len(self.posts)
@@ -42,13 +43,15 @@ class User(ObjectType):
     def resolve_following_count(self, info):
         return len(self.following)
 
+    async def resolve_test(self, info):
+        headers = get_curr_user(info)
+        return str(headers)
 
 
 class UserQueries(ObjectType):
     all_users = Field(List(User), limit=Int(), offset=Int())
     one_user = Field(User, id = Int(required=True))
     me = Field(User)
-    test = Field(String())
 
     async def resolve_all_users(self, info, limit, offset):
         curr_user = get_curr_user(info)
@@ -67,6 +70,4 @@ class UserQueries(ObjectType):
         query = db.session.query(_md.User).filter(_md.User.id == curr_user["id"])
         return query.first()
 
-    async def resolve_test(self, info):
-        headers = get_curr_user(info)
-        return str(headers)
+    
