@@ -40,5 +40,6 @@ def create_jwt_token(data):
 
 def get_curr_user(info: ResolveInfo):
     token = info.context['request']["headers"]
-    return token
+    header = filter(lambda key: key[0] == "authorization", token)
+    return str(header)
         

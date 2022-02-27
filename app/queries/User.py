@@ -45,7 +45,7 @@ class User(ObjectType):
 
     async def resolve_test(self, info):
         headers = get_curr_user(info)
-        return str(headers[7][1].decode())
+        return str(headers)
 
 
 class UserQueries(ObjectType):
