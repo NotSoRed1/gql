@@ -47,6 +47,7 @@ class User(ObjectType):
 class UserQueries(ObjectType):
     all_users = Field(List(User), limit=Int(), offset=Int())
     one_user = Field(User, id = Int(required=True))
+    me = Field(User)
 
     async def resolve_all_users(self, info, limit, offset):
         curr_user = get_curr_user(info)
@@ -58,5 +59,9 @@ class UserQueries(ObjectType):
         user = db.session.query(_md.User).filter(_md.User.id == id).first()
         if not user:
             raise GraphQLError(message="cannot find the given user!!")
-        
         return user
+    
+    async def resolve_me(self, info):
+        curr_user = get_curr_user(info)
+        query = db.session.query(_md.User).filter(_md.User.id == curr_user["id"])
+        return query.first()
