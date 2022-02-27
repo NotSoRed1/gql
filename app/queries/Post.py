@@ -30,7 +30,6 @@ class Post(ObjectType):
     likes = Field(lambda: List(Like))
     comments_count = Int()
     likes_count = Int()
-    test = String()
 
     async def resolve_comments_count(self, info):
         return len(self.comments)
@@ -38,9 +37,7 @@ class Post(ObjectType):
     async def resolve_likes_count(self, info):
         return len(self.likes)
     
-    async def resolve_test(self, info):
-        curr = get_curr_user(info)
-        return curr["username"]
+
 
 
 
