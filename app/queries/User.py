@@ -32,7 +32,6 @@ class User(ObjectType):
     following = List(Follow)
     followers_count = Int()
     following_count = Int()
-    test = String()
 
     def resolve_posts_count(self, info):
         return len(self.posts)
@@ -43,9 +42,7 @@ class User(ObjectType):
     def resolve_following_count(self, info):
         return len(self.following)
 
-    async def resolve_test(self, info):
-        headers = get_curr_user(info)
-        return str(headers)
+    
 
 
 class UserQueries(ObjectType):
