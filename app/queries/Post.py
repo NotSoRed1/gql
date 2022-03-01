@@ -4,10 +4,11 @@ from graphene import (
         List,
         Int, 
         Field,
-        Enum, 
+        Boolean,
         DateTime, 
     )
 
+from sqlalchemy.sql import exists
 from fastapi_sqlalchemy import db
 from graphql import GraphQLError
 import app.models as _md
@@ -30,6 +31,7 @@ class Post(ObjectType):
     likes = Field(lambda: List(Like))
     comments_count = Int()
     likes_count = Int()
+    is_liked = Boolean()
 
     async def resolve_comments_count(self, info):
         return len(self.comments)
@@ -37,7 +39,10 @@ class Post(ObjectType):
     async def resolve_likes_count(self, info):
         return len(self.likes)
     
-
+    async def resolve_is_liked(self, info):
+        curr_user = get_curr_user(info)
+        result = db.session.query(exists().where(_md.Like.post_id == self.id, _md.Like.user_id == curr_user["id"])).scalar()
+        return result
 
 
 
