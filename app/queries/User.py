@@ -32,7 +32,6 @@ class User(ObjectType):
     following = List(Follow)
     followers_count = Int()
     following_count = Int()
-
     def resolve_posts_count(self, info):
         return len(self.posts)
 
@@ -42,13 +41,13 @@ class User(ObjectType):
     def resolve_following_count(self, info):
         return len(self.following)
 
-    
+
 
 
 class UserQueries(ObjectType):
     all_users = Field(List(User), limit=Int(), offset=Int())
     one_user = Field(User, id = Int(required=True))
-    me = Field(User)
+    # me = Field(Me)
 
     async def resolve_all_users(self, info, limit, offset):
         curr_user = get_curr_user(info)
@@ -62,9 +61,10 @@ class UserQueries(ObjectType):
             raise GraphQLError(message="cannot find the given user!!")
         return user
     
-    async def resolve_me(self, info):
-        curr_user = get_curr_user(info)
-        query = db.session.query(_md.User).filter(_md.User.id == curr_user["id"])
-        return query.first()
+    # async def resolve_me(self, info):
+    #     curr_user = get_curr_user(info)
+    #     query = db.session.query(_md.User).filter(_md.User.id == curr_user["id"])
+        
+    #     return query.first()
 
     

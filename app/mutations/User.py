@@ -4,13 +4,14 @@ from graphene import (
         Mutation,
         Boolean,
         Int,
+        Field
     )
 
 from graphql import GraphQLError
 from fastapi_sqlalchemy import db
 import app.models as _md
 from app.utils import get_curr_user, hash_password, verify_password, create_jwt_token
-
+from queries.User import User
 
 
 
@@ -111,10 +112,30 @@ class Login(Mutation):
 
         return Login(ok=True, token=token)
 
+class Me(Mutation):
+    class Arguments:
+        pass
+    
+    ok = Boolean()
+    token = String()
+    me = Field(User)
 
+    async def mutate(self, info, username, password):
+        user = db.session.query(_md.User).filter(_md.User.username == username).first()
+        if not user:
+            raise GraphQLError(message="incorrect username!!")
+
+        if not verify_password(password, user.password):
+            raise GraphQLError(message="incorrect password!!")
+
+        data = {"id": user.id, "username": user.username}
+        token = create_jwt_token(data)
+
+        return Login(ok=True, token=token, me= user)
 
 class UserMutations(ObjectType):
     create_user = Create.Field()
     delete_user = Delete.Field()
     update_user = Update.Field()
     login = Login.Field()
+    me = Me.Field()
