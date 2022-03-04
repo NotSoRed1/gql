@@ -114,24 +114,21 @@ class Login(Mutation):
 
 class Me(Mutation):
     class Arguments:
-        pass
     
     ok = Boolean()
     token = String()
     me = Field(User)
 
-    async def mutate(self, info, username, password):
-        user = db.session.query(_md.User).filter(_md.User.username == username).first()
-        if not user:
-            raise GraphQLError(message="incorrect username!!")
+    async def mutate(self, info):
+        curr_user = get_curr_user()
 
-        if not verify_password(password, user.password):
-            raise GraphQLError(message="incorrect password!!")
-
-        data = {"id": user.id, "username": user.username}
+        data = {"id": curr_user["id"], "username": curr_user["username"]}
         token = create_jwt_token(data)
+        query = db.session.query(_md.User).filter(_md.User.id == id).first()
+        return Login(ok=True, token=token, me = query)
 
-        return Login(ok=True, token=token, me = user)
+
+
 
 class UserMutations(ObjectType):
     create_user = Create.Field()
