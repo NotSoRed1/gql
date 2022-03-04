@@ -112,20 +112,21 @@ class Login(Mutation):
 
         return Login(ok=True, token=token)
 
-class Me(Mutation):
-    class Arguments:
-    
-    ok = Boolean()
-    token = String()
-    me = Field(User)
+# class Me(Mutation):
+#     class Arguments:
+#         pass
 
-    async def mutate(self, info):
-        curr_user = get_curr_user()
+#     ok = Boolean()
+#     token = String()
+#     user = Field(User)
 
-        data = {"id": curr_user["id"], "username": curr_user["username"]}
-        token = create_jwt_token(data)
-        query = db.session.query(_md.User).filter(_md.User.id == id).first()
-        return Login(ok=True, token=token, me = query)
+#     async def mutate(self, info):
+#         curr_user = get_curr_user(info)
+
+#         data = {"id": curr_user["id"], "username": curr_user["username"]}
+#         token = create_jwt_token(data)
+#         query = db.session.query(_md.User).filter(_md.User.id == curr_user["id"]).first()
+#         return Login(ok=True, token=token, user = query)
 
 
 
@@ -135,4 +136,4 @@ class UserMutations(ObjectType):
     delete_user = Delete.Field()
     update_user = Update.Field()
     login = Login.Field()
-    me = Me.Field()
+    # me = Me.Field()
