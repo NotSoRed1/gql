@@ -11,7 +11,7 @@ from graphql import GraphQLError
 from fastapi_sqlalchemy import db
 import app.models as _md
 from app.utils import get_curr_user, hash_password, verify_password, create_jwt_token
-from queries.User import User
+from app.queries.User import User
 
 
 
@@ -131,7 +131,7 @@ class Me(Mutation):
         data = {"id": user.id, "username": user.username}
         token = create_jwt_token(data)
 
-        return Login(ok=True, token=token, me= user)
+        return Login(ok=True, token=token, me = user)
 
 class UserMutations(ObjectType):
     create_user = Create.Field()
