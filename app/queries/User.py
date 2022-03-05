@@ -66,7 +66,10 @@ class UserQueries(ObjectType):
     async def resolve_search_users(self, info, query):
         curr_user = get_curr_user(info)
         search = db.session.query(_md.User).filter(_md.User.username.contains(query)).limit(5).all()
-        return search
+        if query:
+            return search
+        else:
+            return []
     
     async def resolve_me(self, info):
         curr_user = get_curr_user(info)
