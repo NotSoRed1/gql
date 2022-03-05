@@ -47,7 +47,7 @@ class User(ObjectType):
 class UserQueries(ObjectType):
     all_users = Field(List(User), limit=Int(), offset=Int())
     one_user = Field(User, id = Int(required=True))
-    search_users = Field(User, query = String(required=True))
+    search_users = Field(List(User), query = String(required=True))
     me = Field(User)
 
     async def resolve_all_users(self, info, limit, offset):
