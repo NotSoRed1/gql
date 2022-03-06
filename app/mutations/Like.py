@@ -1,5 +1,6 @@
 from ast import In
 from graphene import (
+    Field,
     ObjectType,
     Mutation,
     Boolean,
@@ -13,17 +14,17 @@ import app.models as _md
 from app.utils import get_curr_user
 
 
-class Create(Mutation):
+
+class CreateLike(Mutation):
     class Arguments:
         post_id = Int(required=True)
     
     ok = Boolean()
-    pid = Int()
+    test = Int()
 
     def mutate(self, info, post_id):
         curr_user = get_curr_user(info)
         query = db.session.query(_md.Like).filter(_md.Like.user_id == curr_user["id"] and _md.Like.post_id == post_id)
-
         if not query.first():
             like = _md.Like(user_id=curr_user["id"], post_id=post_id)
             try:
@@ -36,10 +37,10 @@ class Create(Mutation):
             query.delete(synchronize_session=False)    
             db.session.commit()
 
-        return Create(ok=True, pid=post_id)
+        return CreateLike(test=post_id ,ok=True)
 
 
 
 
 class LikeMutations(ObjectType):
-    toggle_like = Create.Field()
+    toggle_like = CreateLike.Field()
