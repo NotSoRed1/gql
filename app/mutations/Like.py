@@ -25,11 +25,12 @@ class CreateLike(Mutation):
     def mutate(self, info, post_id):
         curr_user = get_curr_user(info)
         query = db.session.query(_md.Like).filter(_md.Like.user_id == curr_user["id"] , _md.Like.post_id == post_id)
-        if query.first() is not None:
+        if not query.first():
             like = _md.Like(user_id=curr_user["id"], post_id=post_id)
             try:
                 db.session.add(like)
                 db.session.commit()
+                db.session.refresh(like)
 
             except Exception as e:
                 raise GraphQLError(message="somthing went wrong!!")
