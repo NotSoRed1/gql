@@ -18,6 +18,7 @@ class Create(Mutation):
         post_id = Int(required=True)
     
     ok = Boolean()
+    pid = Int()
 
     def mutate(self, info, post_id):
         curr_user = get_curr_user(info)
@@ -35,7 +36,7 @@ class Create(Mutation):
             query.delete(synchronize_session=False)    
             db.session.commit()
 
-        return Create(ok=True)
+        return Create(ok=True, pid=post_id)
 
 
 
