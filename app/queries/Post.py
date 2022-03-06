@@ -42,7 +42,7 @@ class Post(ObjectType):
     
     async def resolve_is_liked(self, info):
         curr_user = get_curr_user(info)
-        result = db.session.query(_md.Like).filter(_md.Like.user_id == curr_user["id"] & _md.Like.post_id == self.id).first()
+        result = db.session.query(_md.Like).filter(_md.Like.user_id == curr_user["id"] , _md.Like.post_id == self.id).first()
         if result is not None:
             return True
         else:
