@@ -4,7 +4,8 @@ from graphene import (
         Int, 
         Field, 
         DateTime, 
-        List, 
+        List,
+        Boolean
     )
 
 from fastapi_sqlalchemy import db
@@ -32,6 +33,9 @@ class User(ObjectType):
     following = List(Follow)
     followers_count = Int()
     following_count = Int()
+    isFollowed = Boolean()
+
+
     def resolve_posts_count(self, info):
         return len(self.posts)
 
@@ -40,6 +44,13 @@ class User(ObjectType):
 
     def resolve_following_count(self, info):
         return len(self.following)
+
+    def resolve_isFollowed(self, info):
+        curr_user = get_curr_user(info)
+        if curr_user["id"] in self.followers:
+            return True
+        else:
+            return False
 
 
 
