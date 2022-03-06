@@ -48,7 +48,7 @@ class User(ObjectType):
 
     def resolve_isFollowed(self, info):
         curr_user = get_curr_user(info)
-        query = db.session.query(_md.Follow).filter(exists().where(_md.Follow.follower_id == curr_user["id"] and _md.Follow.followed_id == self.id)).scalar()
+        query = db.session.query(_md.Follow).filter(exists().where(_md.Follow.follower_id == curr_user["id"] & _md.Follow.followed_id == self.id)).scalar()
         return query
 
 
