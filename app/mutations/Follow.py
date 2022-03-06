@@ -21,7 +21,7 @@ class Create(Mutation):
 
     def mutate(self, info, followed_id):
         curr_user = get_curr_user(info)
-        query = db.session.query(_md.Follow).filter(_md.Follow.follower_id == curr_user["id"] and _md.Follow.followed_id == followed_id)
+        query = db.session.query(_md.Follow).filter(_md.Follow.follower_id == curr_user["id"] , _md.Follow.followed_id == followed_id)
 
         if not query.first():
             follow = _md.Follow(follower_id=curr_user["id"], followed_id=followed_id)
