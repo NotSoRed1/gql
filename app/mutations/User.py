@@ -4,7 +4,8 @@ from graphene import (
         Mutation,
         Boolean,
         Int,
-        Field
+        Field,
+        
     )
 
 from graphql import GraphQLError
@@ -67,28 +68,27 @@ class Delete(Mutation):
 
 
 
-class Update(Mutation):
+class UpdateUser(Mutation):
     class Arguments:
-        id = Int(required=True)
-        username = String(required=True)
-        email = String(required=True)
+        avatarUrl = String(required = True)
+        username = String(required = True)
+        email = String(required = True)
+        bio = String(required = True)
 
     ok = Boolean()
+    user = Field(lambda: User)
 
-    def mutate(self, info, id, username, email):
+    def mutate(self, info, avatarUrl, username, email, bio):
         curr_user = get_curr_user(info)
-        query = db.session.query(_md.User).filter(_md.User.id == id)
+        query = db.session.query(_md.User).filter(_md.User.id == curr_user["id"])
 
-        if not query.first():
-            raise GraphQLError('cannot find the given user!!')
         
-        if not query.first().id == curr_user["id"]:
-            raise GraphQLError(message="unauthorized !!")
-
-        query.update({ "username": username, "email": email })
+        query.update({ "username": username, "email": email , "bio": bio, "avatar_url": avatarUrl})
         db.session.commit()
+        # db.session.refresh(query)
+        
 
-        return Delete(ok=True)
+        return UpdateUser(ok=True, user=query.first())
 
 
 class Login(Mutation):
@@ -134,6 +134,6 @@ class Login(Mutation):
 class UserMutations(ObjectType):
     create_user = Create.Field()
     delete_user = Delete.Field()
-    update_user = Update.Field()
+    update_user = UpdateUser.Field()
     login = Login.Field()
     # me = Me.Field()
