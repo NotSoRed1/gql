@@ -176,7 +176,7 @@ A social media graphQl API, built using fastApi framework
 
 
 
-| comments table |
+| follows table  |
 |----------------|
 | follower_id    |
 | followed_id    |
