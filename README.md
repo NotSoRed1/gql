@@ -23,14 +23,48 @@ A social media graphQl API, built using fastApi framework
 | follows    |&check; | &check; | &check; |
 
 
-# Queries and mutations
+# Installation
+
+install the dependencies
+###Windows
+```sh
+$ pip install -r requirements.txt
+```
+###Linux && Mac
+```sh
+$ pip3 install -r requirements.txt
+```
+
+make a .env file with the following information or create the then directly 
+in environment variables 
+```
+my_URL = your postgress database url
+secret_key = secret key for the hash function
+expire_time = jwt_expire time by minutes
+algorithm = HS256
+```
+
+run the server
+```sh
+$ alembic upgrade head && uvicorn app.main:app --host=0.0.0.0 --port=3000
+```
+
+you can try the api and see the generated docs and schema in 
+the graphql playground
+```
+http://localhost:3000/graphql/
+```
+
+
+# Queries and mutations 
+note: you better look at the generated docs by graphql in the playground
+if you want the full details about every query and mutation 
 
 ## User
 ### fields:
 - id
 - username
 - email
-- password
 - bio
 - avatar_url
 - created_at
