@@ -1,6 +1,6 @@
 A social media graphQl API, built using fastApi framework
 
-## Features
+# Features
 - get, add, remove and update posts.
 - get, add, remove and update users.
 - get, add, remove and update comments.
@@ -23,9 +23,9 @@ A social media graphQl API, built using fastApi framework
 | follows    |  [x]   |   [x]   |  [x]   |
 
 
-## Queries and mutations
+# Queries and mutations
 
-### User
+## User
 - fields:
     - id
     - username
@@ -53,7 +53,7 @@ A social media graphQl API, built using fastApi framework
     - login(username, password)
 
 
-### Post
+## Post
 - fields:
     - id
     - content
@@ -75,7 +75,7 @@ A social media graphQl API, built using fastApi framework
     - update_post(id, content, attachement)
 
 
-### Comment
+## Comment
 - fields:
     - id
     - content
@@ -93,7 +93,7 @@ A social media graphQl API, built using fastApi framework
     - update_comment(id, content)
 
 
-### Like
+## Like
 - fields:
     - user_id
     - post_id
@@ -106,7 +106,7 @@ A social media graphQl API, built using fastApi framework
     - toggle_like(post_id)
 
 
-### Follow
+## Follow
 - fields:
     - follower_id
     - followed_id
@@ -121,28 +121,62 @@ A social media graphQl API, built using fastApi framework
 
 
 
-## Tables
+# Tables
 
-| users table |     | posts table |      | comments table |
-|-------------|     |-------------|      |----------------|
-| id          |     | id          |      | id             |
-| username    |     | content     |      | content        |
-| email       |     | attachement |      | author_id      |
-| password    |     | author_id   |      | author         |
-| bio         |     | author      |      | post_id        |
-| avatar_url  |     | comments    |      | post           |
-| created_at  |     | likes       |      | created_at     |
-| posts       |     | created_at  |      | updated_at     |
-| followers   |     | updated_at  |      
+| users table |           
+|-------------|           
+| id          |           
+| username    |           
+| email       |           
+| password    |           
+| bio         |           
+| avatar_url  |           
+| created_at  |           
+| posts       |           
+| followers   |           
 | following   |                           
 
 
+| posts table |
+|-------------|
+| id          |
+| content     |     
+| attachement |     
+| author_id   |     
+| author      |     
+| comments    |     
+| likes       |
+| created_at  |
+| updated_at  |
 
-| comments table |     | comments table |
-|----------------|     |----------------|
-| follower_id    |     | post_id        |
-| followed_id    |     | user_id        |
-| follower       |     | author         |
+
+
+| comments table |
+|----------------|
+| id             |
+| content        |
+| author_id      |
+| author         |
+| post_id        |
+| post           |
+| created_at     |
+| updated_at     |
+
+
+
+
+| comments table |
+|----------------|
+| post_id        |
+| user_id        |
+| author         |
+
+
+
+
+| comments table |
+|----------------|
+| follower_id    |
+| followed_id    |
+| follower       |
 | followed       |
-
-
