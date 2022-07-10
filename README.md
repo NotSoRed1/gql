@@ -12,15 +12,15 @@ A social media graphQl API, built using fastApi framework
 
 |            | Add     | Update  | Remove  | get one  | get all |
 |------------|---------|---------|---------|----------|---------| 
-| posts      | &cross; | &cross; | &cross; |  &cross; | &cross; |
-| users      | &cross; | &cross; | &cross; |  &cross; | &cross; |
-| comments   | &cross; | &cross; | &cross; |  &cross; | &cross; |
+| posts      | &check; | &check; | &check; |  &check; | &check; |
+| users      | &check; | &check; | &check; |  &check; | &check; |
+| comments   | &check; | &check; | &check; |  &check; | &check; |
 
 
 |            | toggle | get one | get all |
 |------------|--------|---------|---------|
-| likes      |&cross; | &cross; | &cross; |
-| follows    |&cross; | &cross; | &cross; |
+| likes      |&check; | &check; | &check; |
+| follows    |&check; | &check; | &check; |
 
 
 # Queries and mutations
