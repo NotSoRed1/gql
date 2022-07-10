@@ -121,7 +121,7 @@ A social media graphQl API, built using fastApi framework
 
 
 
-# Tables
+# Database Tables
 
 | users table |           
 |-------------|           
