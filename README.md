@@ -26,6 +26,7 @@ A social media graphQl API, built using fastApi framework
 ## what you can do with the api:
 here is an instagram clone i made using this api and reactjs
 https://instagram3.netlify.app
+![image info](res/instagram-clone.png)
 
 
 
