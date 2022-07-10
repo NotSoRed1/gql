@@ -26,11 +26,11 @@ A social media graphQl API, built using fastApi framework
 # Installation
 
 install the dependencies
-###Windows
+### Windows
 ```sh
 $ pip install -r requirements.txt
 ```
-###Linux && Mac
+### Linux && Mac
 ```sh
 $ pip3 install -r requirements.txt
 ```
