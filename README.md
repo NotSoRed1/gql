@@ -23,8 +23,8 @@ A social media graphQl API, built using fastApi framework
 | follows    |&check; | &check; | &check; |
 
 
-## what you can do with the api:
-here is an instagram clone i made using this api and reactjs
+## What you can do with it:
+Here is an instagram clone i made using this api and reactjs
 https://instagram3.netlify.app
 ![image info](res/instagram-clone.png)
 
@@ -32,15 +32,12 @@ https://instagram3.netlify.app
 
 # Installation
 
-install the dependencies
-### Windows
+Installing the dependencies
+
 ```sh
 $ pip install -r requirements.txt
 ```
-### Linux && Mac
-```sh
-$ pip3 install -r requirements.txt
-```
+
 
 make a .env file with the following information or create the then directly 
 in environment variables 
@@ -54,12 +51,6 @@ algorithm = HS256
 run the server
 ```sh
 $ alembic upgrade head && uvicorn app.main:app --host=0.0.0.0 --port=3000
-```
-
-you can try the api and see the generated docs and schema in 
-the graphql playground
-```
-http://localhost:3000/graphql/
 ```
 
 
